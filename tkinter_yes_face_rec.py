@@ -7,8 +7,6 @@ import face_recognition
 
 colors = [cv2.COLOR_BGR2YCrCb, cv2.COLOR_BGR2GRAY, cv2.COLOR_BGR2HLS, cv2.COLOR_BGR2HSV, cv2.COLOR_BGR2LAB,
           cv2.COLOR_BGR2XYZ]
-
-
 # function to update the video feed
 def update_video_feed():
     # read the current frame from live feed camera
@@ -63,12 +61,10 @@ label.pack(padx=10, pady=10)
 # create the surprise button
 toggle_button = ttk.Button(window, text="Surprise is Off", command=toggle_surprise)
 toggle_button.pack(pady=10)
-global rec_colors
 
 # initialize global variables
 show_surprise = False
 num = 0
-rec_colors = (0, 0, 0)
 # updating video feed with rgb colors or random colors according to show_suprise
 update_video_feed()
 
