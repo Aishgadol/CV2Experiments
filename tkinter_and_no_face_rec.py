@@ -5,13 +5,30 @@ from PIL import Image, ImageTk
 
 # Create a function to update the video feed
 def update_video_feed():
+    # Read a frame from the camera
+
     ret, frame = cap.read()
     if ret:
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        #if suprise is pressed than color will change
+        if not show_surprise:
+            frame=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+
+        # Convert the frame to a format that Tkinter can display
         photo = ImageTk.PhotoImage(image=Image.fromarray(frame))
         label.config(image=photo)
         label.image = photo
-    window.after(10, update_video_feed)  # Update every 10 milliseconds
+
+    # Schedule the function to run again after 10 milliseconds
+    window.after(10, update_video_feed)
+
+# Function to toggle the "surprise" text
+def toggle_surprise():
+    if toggle_button['text']=="Surprise is Off":
+        toggle_button['text']="Surprise is On"
+    else:
+        toggle_button['text'] = "Surprise is Off"
+    global show_surprise
+    show_surprise = not show_surprise
 
 # Initialize OpenCV video capture
 cap = cv2.VideoCapture(0)
@@ -22,14 +39,21 @@ window.title("Video Feed")
 
 # Create a label to display the video feed
 label = ttk.Label(window)
-label.pack(padx=5, pady=5)
+label.pack(padx=10, pady=10)
+
+# Create a button to toggle the "surprise" text
+toggle_button = ttk.Button(window, text="Surprise is Off", command=toggle_surprise)
+toggle_button.pack(pady=10)
+
+# Initialize the "show_surprise" variable
+show_surprise = False
 
 # Start updating the video feed
 update_video_feed()
 
 # Create a quit button to exit the application
 quit_button = ttk.Button(window, text="Quit", command=window.quit)
-quit_button.pack(pady=15)
+quit_button.pack(pady=10)
 
 # Run the Tkinter main loop
 window.mainloop()

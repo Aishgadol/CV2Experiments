@@ -23,10 +23,10 @@ def update_video_feed():
 
 # Function to toggle the "surprise" text
 def toggle_surprise():
-    if toggle_button['text']=="Surprise Off":
-        toggle_button['text']="Surprise On"
+    if toggle_button['text']=="Surprise is Off":
+        toggle_button['text']="Surprise is On"
     else:
-        toggle_button['text'] = "Surprise Off"
+        toggle_button['text'] = "Surprise is Off"
     global show_surprise
     show_surprise = not show_surprise
 
@@ -42,7 +42,7 @@ label = ttk.Label(window)
 label.pack(padx=10, pady=10)
 
 # Create a button to toggle the "surprise" text
-toggle_button = ttk.Button(window, text="Surprise Off", command=toggle_surprise)
+toggle_button = ttk.Button(window, text="Surprise is Off", command=toggle_surprise)
 toggle_button.pack(pady=10)
 
 # Initialize the "show_surprise" variable
