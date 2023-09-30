@@ -1,8 +1,11 @@
 import cv2
 import tkinter as tk
 from tkinter import ttk
+import random
 from PIL import Image, ImageTk
 
+
+colors=[cv2.COLOR_BGR2YCrCb, cv2.COLOR_BGR2GRAY,cv2.COLOR_BGR2HLS,cv2.COLOR_BGR2HSV]
 # Create a function to update the video feed
 def update_video_feed():
     # Read a frame from the camera
@@ -12,6 +15,8 @@ def update_video_feed():
         #if suprise is pressed than color will change
         if not show_surprise:
             frame=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+        else:
+            frame=cv2.cvtColor(frame,colors[num])
 
         # Convert the frame to a format that Tkinter can display
         photo = ImageTk.PhotoImage(image=Image.fromarray(frame))
@@ -29,6 +34,8 @@ def toggle_surprise():
         toggle_button['text'] = "Surprise is Off"
     global show_surprise
     show_surprise = not show_surprise
+    global num
+    num = random.randint(0, 3)
 
 # Initialize OpenCV video capture
 cap = cv2.VideoCapture(0)
@@ -47,7 +54,7 @@ toggle_button.pack(pady=10)
 
 # Initialize the "show_surprise" variable
 show_surprise = False
-
+num = 0
 # Start updating the video feed
 update_video_feed()
 
