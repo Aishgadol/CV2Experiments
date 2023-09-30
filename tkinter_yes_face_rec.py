@@ -2,21 +2,16 @@ import cv2
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
-import random
-import string
-nums=[i for i in range(1000000)]
+
 # Create a function to update the video feed
 def update_video_feed():
     # Read a frame from the camera
 
     ret, frame = cap.read()
     if ret:
-        # Convert the frame to RGB format
-        if show_surprise:
-            frame=cv2.cvtColor(frame,cv2.COLOR_RGB2GRAY)
-        else:
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            print("".join(random.choice(string.ascii_uppercase) for _ in range(4)))
+        #if suprise is pressed than color will change
+        if not show_surprise:
+            frame=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
 
         # Convert the frame to a format that Tkinter can display
         photo = ImageTk.PhotoImage(image=Image.fromarray(frame))
