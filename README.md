@@ -28,5 +28,5 @@ Before running the application, ensure you have the following Python libraries i
 
 Goals:
 The main goals of this project was to learn about computer vision using face detection, and incorporate this knowledge and features into a tkinter GUI, alongside some interesting features such as:
--the always changing frame around the detected face.
--everytime the suprise button is pressed, a random color scheme is applied, out of several possible color schemes.
+- the always changing frame around the detected face.
+- everytime the suprise button is pressed, a random color scheme is applied, out of several possible color schemes.
