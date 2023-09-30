@@ -1,17 +1,27 @@
 import cv2
 import tkinter as tk
 from tkinter import ttk
+import random
 from PIL import Image, ImageTk
+import face_recognition
 
+
+colors=[cv2.COLOR_BGR2YCrCb, cv2.COLOR_BGR2GRAY,cv2.COLOR_BGR2HLS,cv2.COLOR_BGR2HSV,cv2.COLOR_BGR2LAB,cv2.COLOR_BGR2XYZ]
 # Create a function to update the video feed
 def update_video_feed():
     # Read a frame from the camera
 
     ret, frame = cap.read()
     if ret:
+        face_locations=face_recognition.face_locations(frame)
+        for face_loc in face_locations:
+            rec_colors = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+            cv2.rectangle(frame,(face_loc[3],face_loc[0]),(face_loc[1],face_loc[2]),color=rec_colors,thickness=2)
         #if suprise is pressed than color will change
         if not show_surprise:
             frame=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+        else:
+            frame=cv2.cvtColor(frame,colors[num])
 
         # Convert the frame to a format that Tkinter can display
         photo = ImageTk.PhotoImage(image=Image.fromarray(frame))
@@ -19,7 +29,7 @@ def update_video_feed():
         label.image = photo
 
     # Schedule the function to run again after 10 milliseconds
-    window.after(10, update_video_feed)
+    window.after(5, update_video_feed)
 
 # Function to toggle the "surprise" text
 def toggle_surprise():
@@ -29,6 +39,8 @@ def toggle_surprise():
         toggle_button['text'] = "Surprise is Off"
     global show_surprise
     show_surprise = not show_surprise
+    global num
+    num = random.randint(0, len(colors)-1)
 
 # Initialize OpenCV video capture
 cap = cv2.VideoCapture(0)
@@ -44,10 +56,12 @@ label.pack(padx=10, pady=10)
 # Create a button to toggle the "surprise" text
 toggle_button = ttk.Button(window, text="Surprise is Off", command=toggle_surprise)
 toggle_button.pack(pady=10)
+global rec_colors
 
 # Initialize the "show_surprise" variable
 show_surprise = False
-
+num = 0
+rec_colors=(0,0,0)
 # Start updating the video feed
 update_video_feed()
 

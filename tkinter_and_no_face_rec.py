@@ -5,7 +5,7 @@ import random
 from PIL import Image, ImageTk
 
 
-colors=[cv2.COLOR_BGR2YCrCb, cv2.COLOR_BGR2GRAY,cv2.COLOR_BGR2HLS,cv2.COLOR_BGR2HSV]
+colors=[cv2.COLOR_BGR2YCrCb, cv2.COLOR_BGR2GRAY,cv2.COLOR_BGR2HLS,cv2.COLOR_BGR2HSV,cv2.COLOR_BGR2LAB,cv2.COLOR_BGR2XYZ]
 # Create a function to update the video feed
 def update_video_feed():
     # Read a frame from the camera
@@ -35,7 +35,7 @@ def toggle_surprise():
     global show_surprise
     show_surprise = not show_surprise
     global num
-    num = random.randint(0, 3)
+    num = random.randint(0, len(colors)-1)
 
 # Initialize OpenCV video capture
 cap = cv2.VideoCapture(0)
