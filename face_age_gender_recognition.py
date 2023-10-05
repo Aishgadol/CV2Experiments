@@ -59,8 +59,6 @@ def toggle_surprise():
     # by changing it here, every press of the button will generate random num, and thus livefeed won't constantly
     # change colors but just once, everytime we press the button
     num = random.randint(0, len(colors) - 1)
-
-
 # Importing Models and set mean values
 age1 = "age_deploy.prototxt"
 age2 = "age_net.caffemodel"
