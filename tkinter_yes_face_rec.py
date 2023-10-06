@@ -14,15 +14,16 @@ def update_video_feed():
     if ret:
         # get all locations of faces in frame
         face_locations = face_recognition.face_locations(frame)
-        # draw a square around each face
-        for face_loc in face_locations:
-            rec_colors = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-            cv2.rectangle(frame, (face_loc[3], face_loc[0]), (face_loc[1], face_loc[2]), color=rec_colors, thickness=2)
         # if suprise is pressed than color will randomly change
         if not show_surprise:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         else:
             frame = cv2.cvtColor(frame, colors[num])
+        # draw a square around each face
+        for face_loc in face_locations:
+            rec_colors = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+            cv2.rectangle(frame, (face_loc[3], face_loc[0]), (face_loc[1], face_loc[2]), color=rec_colors, thickness=2)
+
 
         # used gpt for this, need to convert frame from cv2 format to tkinter format so it can be displayed
         photo = ImageTk.PhotoImage(image=Image.fromarray(frame))
