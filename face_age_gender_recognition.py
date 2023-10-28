@@ -9,6 +9,7 @@ import face_recognition
 colors = [cv2.COLOR_BGR2YCrCb, cv2.COLOR_BGR2GRAY, cv2.COLOR_BGR2HLS, cv2.COLOR_BGR2HSV, cv2.COLOR_BGR2LAB,
           cv2.COLOR_BGR2XYZ]
 # function to update the video feed
+
 def update_video_feed():
     # read the current frame from live feed camera
     ret, frame = cap.read()
